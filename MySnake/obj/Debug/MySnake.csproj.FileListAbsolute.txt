@@ -1,0 +1,10 @@
+C:\Users\User_PC\Documents\PP2\Student\week 5\MySnake\MySnake\obj\Debug\MySnake.csprojResolveAssemblyReference.cache
+C:\Users\User_PC\Documents\PP2\Student\week 5\MySnake\MySnake\obj\Debug\MySnake.csproj.CoreCompileInputs.cache
+C:\Users\User_PC\Documents\PP2\Student\week 5\MySnake\MySnake\bin\Debug\MySnake.exe.config
+C:\Users\User_PC\Documents\PP2\Student\week 5\MySnake\MySnake\bin\Debug\MySnake.exe
+C:\Users\User_PC\Documents\PP2\Student\week 5\MySnake\MySnake\bin\Debug\MySnake.pdb
+C:\Users\User_PC\Documents\PP2\Student\week 5\MySnake\MySnake\obj\Debug\MySnake.exe
+C:\Users\User_PC\Documents\PP2\Student\week 5\MySnake\MySnake\obj\Debug\MySnake.pdb
+C:\Users\User_PC\Documents\PP2\Student\week 5\MySnake\MySnake\bin\Debug\Level1.txt
+C:\Users\User_PC\Documents\PP2\Student\week 5\MySnake\MySnake\bin\Debug\lvl1.txt
+C:\Users\User_PC\Documents\PP2\Student\week 5\MySnake\MySnake\bin\Debug\files\Title.txt
