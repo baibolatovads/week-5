@@ -9,8 +9,8 @@ namespace MySnake
 {
     class Menu
     {
-        string[] items = { "New Game", "Load Game", "Save Game", "Settings", "Exit" };
-        int ItemsCount = 5;
+        string[] items = { "New Game", "Exit" };
+        int ItemsCount = 2;
         int selectedItemIndex = 0;
         ConsoleColor selectedColor = ConsoleColor.Red;
         ConsoleColor unselectedColor = ConsoleColor.Yellow;
@@ -21,35 +21,23 @@ namespace MySnake
             
             Game game = new Game();
             game.Start();
+            game.Status();
+            //game.Status();
             while (game.isAlive)
             {
+                
                 ConsoleKeyInfo pressedButton = Console.ReadKey();
                 game.Process(pressedButton);
 
             }
+            
         }
 
-        void LoadGame()
-        {
-            Console.Clear();
-            Console.SetCursorPosition(15, 15);
-            Console.WriteLine("LoadGame");
-            Console.ReadKey();
-        }
 
-        void SaveGame()
+        bool Exit()
         {
-            StatusBar.ShowInfo("SaveGame!");
-        }
-
-        void Settings()
-        {
-            StatusBar.ShowInfo("Settings!");
-        }
-
-        void Exit()
-        {
-            StatusBar.ShowInfo("Exit!");
+            Quit quit = new Quit();
+            return quit.WantToQuit();
         }
 
         public void Draw()
@@ -143,19 +131,10 @@ namespace MySnake
                     {
                         case 0:
                             NewGame();
-                            
                             break;
                         case 1:
-                            LoadGame();
-                            break;
-                        case 2:
-                            SaveGame();
-                            break;
-                        case 3:
-                            Settings();
-                            break;
-                        case 4:
                             Exit();
+                            
                             break;
                     }
 

@@ -27,15 +27,6 @@ namespace MySnake
         Wall wall;
         public bool isAlive = true;
         public int k = 0;
-       /* public void Start()
-        {
-            Console.Clear();
-            wall.Draw();
-            worm.Draw();
-            food.Draw();
-            Console.SetCursorPosition(5, 1);
-            Console.Write("Score: ");
-        }*/
 
         GameLevel gameLevel;
 
@@ -48,41 +39,20 @@ namespace MySnake
             Console.CursorVisible = false;
         }
 
-      public void Status()
+        
+        public void Status()
         {
-                Console.SetCursorPosition(5, 1);
-                Console.Write("Score:");
-                Console.SetCursorPosition(15, 1);
-                Console.Write(k);
+            Console.SetCursorPosition(5, 1);
+            Console.Write("Score:");
+            Console.SetCursorPosition(15, 1);
+            Console.Write(k);
 
-                /* Console.SetCursorPosition(30, 1);
-                 Console.Write("Speed:");
-                 Console.SetCursorPosition(40, 1);
-                 Console.Write(worm.speed);
-                 Console.Write("  ");*/
-            
+            Console.SetCursorPosition(30, 1);
+            Console.Write("Speed:");
+            Console.SetCursorPosition(40, 1);
+            Console.Write(speed);
+            Console.Write("  ");
         }
-
-
-
-        /* public void lvl(int k)
-         {
-             if (k < 3)
-             {
-                 gameLevel = GameLevel.First;
-                 wall.LoadLevel(gameLevel);
-             }
-             if (k >= 3)
-             {
-                 gameLevel = GameLevel.Second;
-                 wall.LoadLevel(gameLevel);
-             }
-             if (k >= 6)
-             {
-                 gameLevel = GameLevel.Bonus;
-                 wall.LoadLevel(gameLevel);
-             }
-         }*/
 
         public void LoadLvl(int k)
         {
@@ -112,21 +82,21 @@ namespace MySnake
             }
             if (k >= 3)
             {
+               
                 gameLevel = GameLevel.Second;
                 wall.LoadLevel(gameLevel);
             }
-            if (k >= 6)
-            {
-                gameLevel = GameLevel.Bonus;
-                wall.LoadLevel(gameLevel);
-            }
+           
            wall.LoadLevel(gameLevel);
         
            // Lvl();
         }
         public Game()
         {
+            
             gameLevel = GameLevel.First;
+            
+
             worm = new Worm(new Point { X = 10, Y = 10 },
                             ConsoleColor.White, '*');
             food = new Food(new Point { X = 20, Y = 10 },
@@ -144,6 +114,7 @@ namespace MySnake
         }
         public void Start()
         {
+            
             ThreadStart ts = new ThreadStart(Draw);
             Thread t = new Thread(ts);
             t.Start();
@@ -151,11 +122,12 @@ namespace MySnake
 
         public void Draw()
         {
-           
+
             while (isAlive)
             {
                 worm.Move();
-               // Lvl();
+                // Lvl();
+                
 
                 if (worm.body[0].Equals(food.body[0]))
                 {
@@ -163,9 +135,10 @@ namespace MySnake
                     worm.body.Add(new Point { X = food.body[0].X, Y = food.body[0].Y });
                     food.body.Clear();
                     food.body.Add(new Point { X = new Random().Next(1, 34), Y = new Random().Next(1, 34) });
-                    Console.SetCursorPosition(34, 1);
-                    Console.Write(k);
                 }
+                
+
+               
                 else
                 {
                     foreach (Point p in wall.body)
@@ -228,22 +201,20 @@ namespace MySnake
                     worm.DY = 0;
                     break;
                 case ConsoleKey.Escape:
+                    Console.Clear();
+                    Menu menu = new Menu();
+                    menu.Process();
+                    Console.ReadKey();
+                    break;
+                case ConsoleKey.F2:
+                    worm.Save();
+                    food.Save();
+                    break;
+                case ConsoleKey.F1:
+                    worm = worm.Load() as Worm;
+                    food = food.Load() as Food;
                     break;
             }
         }
-
-            /*public void Lvl()
-            {
-                if (worm.body.Count == 2)
-                {
-               
-                gameLevel = GameLevel.Second;
-                wall.LoadLevel(gameLevel);
-                wall.Draw();
-
-            }
-            }
-            */
-        
     }
 }

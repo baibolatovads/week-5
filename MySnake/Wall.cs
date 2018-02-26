@@ -13,6 +13,7 @@ namespace MySnake
         {
 
         }
+        public Wall() { }
         /// <summary>
         /// Levels of the Game
         /// </summary>
@@ -20,7 +21,7 @@ namespace MySnake
         public void LoadLevel(GameLevel level)
         {
             string fname = "";
-          //  string fname2 = "";
+    
 
             switch (level)
             {

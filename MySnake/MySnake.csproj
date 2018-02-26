@@ -48,7 +48,7 @@
     <Compile Include="Menu.cs" />
     <Compile Include="Point.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Quit.cs" />
     <Compile Include="StatusBar.cs" />
     <Compile Include="Wall.cs" />
     <Compile Include="Worm.cs" />
@@ -60,12 +60,17 @@
     <Content Include="files\Title.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Food.xml" />
     <Content Include="Level1.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="lvl1.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Worm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

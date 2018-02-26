@@ -8,9 +8,8 @@ namespace MySnake
 {
    public class Point
     {
-  
 
-        public int X { get; set; }
+       public int X { get; set; }
        public int Y { get; set; }
 
         public override bool Equals(object obj)

@@ -12,8 +12,11 @@ namespace MySnake
         {
             
             Menu menu = new Menu();
+            Game game = new Game();
+            
             while (true)
             {
+                //game.Status();
                 menu.Process();
             }
             /*
