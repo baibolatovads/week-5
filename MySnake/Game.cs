@@ -17,10 +17,12 @@ namespace MySnake
     class Game
     {
         public static int speed = 250;
-        public static int boardW = 40;
-        public static int boardH = 40;
+        public static int boardW = 75;
+        public static int boardH = 30;
 
         bool[,] field = new bool[10, 10];
+
+        Thread t;
 
         Worm worm;
         Food food;
@@ -42,6 +44,7 @@ namespace MySnake
         
         public void Status()
         {
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.SetCursorPosition(5, 1);
             Console.Write("Score:");
             Console.SetCursorPosition(15, 1);
@@ -98,9 +101,9 @@ namespace MySnake
             
 
             worm = new Worm(new Point { X = 10, Y = 10 },
-                            ConsoleColor.White, '*');
+                            ConsoleColor.White, '▲');
             food = new Food(new Point { X = 20, Y = 10 },
-                           ConsoleColor.White, '+');
+                           ConsoleColor.White, '♥');
             wall = new Wall(null, ConsoleColor.White, '#');
 
 
@@ -116,7 +119,7 @@ namespace MySnake
         {
             
             ThreadStart ts = new ThreadStart(Draw);
-            Thread t = new Thread(ts);
+            t = new Thread(ts);
             t.Start();
         }
 
@@ -125,20 +128,27 @@ namespace MySnake
 
             while (isAlive)
             {
+               
                 worm.Move();
                 // Lvl();
                 
-
                 if (worm.body[0].Equals(food.body[0]))
                 {
                     k++;
+                    
                     worm.body.Add(new Point { X = food.body[0].X, Y = food.body[0].Y });
                     food.body.Clear();
-                    food.body.Add(new Point { X = new Random().Next(1, 34), Y = new Random().Next(1, 34) });
+                    food.body.Add(new Point { X = new Random().Next(1, boardW - 5), Y = new Random().Next(2, boardH - 5) });
+                    if (k == 3)
+                    {
+                        gameLevel = GameLevel.Second;
+                        wall.LoadLevel(gameLevel);
+                        worm.body.Clear();
+                        worm.body.Add(new Point { X = 10, Y = 10 });
+                        speed = 200;
+                    }
                 }
                 
-
-               
                 else
                 {
                     foreach (Point p in wall.body)
@@ -165,14 +175,16 @@ namespace MySnake
                 {
                     g.Draw();
                 }
+                Status();
                 Thread.Sleep(Game.speed);
             }
 
             Console.Clear();
-            Console.SetCursorPosition(10, 5);
-            Console.WriteLine("GAME OVER!!!");
-            Console.SetCursorPosition(10, 6);
+            Console.SetCursorPosition(25, 10);
+            Console.WriteLine("GAME OVER!!! Nice try!");
+            Console.SetCursorPosition(25, 11);
             Console.WriteLine("Your score: " + k);
+            
         }
 
         public void Exit()
@@ -185,34 +197,32 @@ namespace MySnake
             switch (pressedButton.Key)
             {
                 case ConsoleKey.UpArrow:
-                    worm.DX = 0;
-                    worm.DY = -1;
-                    break;
                 case ConsoleKey.DownArrow:
-                    worm.DX = 0;
-                    worm.DY = 1;
-                    break;
                 case ConsoleKey.LeftArrow:
-                    worm.DX = -1;
-                    worm.DY = 0;
-                    break;
                 case ConsoleKey.RightArrow:
-                    worm.DX = 1;
-                    worm.DY = 0;
+                    worm.ChangeDir(pressedButton);
                     break;
                 case ConsoleKey.Escape:
                     Console.Clear();
-                    Menu menu = new Menu();
-                    menu.Process();
-                    Console.ReadKey();
+                    t.Abort();
+                    isAlive = false;
                     break;
                 case ConsoleKey.F2:
                     worm.Save();
                     food.Save();
                     break;
                 case ConsoleKey.F1:
+                    t.Abort();
+                    ThreadStart ts = new ThreadStart(Draw);
+                    t = new Thread(ts);
+                    t.Start();
                     worm = worm.Load() as Worm;
                     food = food.Load() as Food;
+                    g_objects.Clear();
+                    g_objects.Add(worm);
+                    g_objects.Add(food);
+                    g_objects.Add(wall);
+                    Console.Clear();
                     break;
             }
         }

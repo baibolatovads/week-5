@@ -30,7 +30,7 @@ namespace MySnake
         public int DX { get; set; }
         public int DY { get; set; }
 
-        
+
 
         public Worm(Point firstPoint, ConsoleColor color, char sign) : base(firstPoint, color, sign)
         {
@@ -50,18 +50,41 @@ namespace MySnake
             body[0].X += DX;
             body[0].Y += DY;
 
-            if (body[0].X == 35)
+            if (body[0].X == Game.boardW)
             {
                 body[0].X = 0;
-            }else if (body[0].Y == 35)
+            }else if (body[0].Y == Game.boardH)
             {
                 body[0].Y = 0;
             }else if (body[0].X == -1)
             {
-                body[0].X = 34;
+                body[0].X = Game.boardW-1;
             }else if (body[0].Y == -1)
             {
-                body[0].Y = 34;
+                body[0].Y = Game.boardH-1;
+            }
+        }
+
+        public void ChangeDir(ConsoleKeyInfo pressedButton)
+        {
+            switch (pressedButton.Key)
+            {
+                case ConsoleKey.UpArrow:
+                    DX = 0;
+                    DY = -1;
+                    break;
+                case ConsoleKey.DownArrow:
+                    DX = 0;
+                    DY = 1;
+                    break;
+                case ConsoleKey.LeftArrow:
+                    DX = -1;
+                    DY = 0;
+                    break;
+                case ConsoleKey.RightArrow:
+                    DX = 1;
+                    DY = 0;
+                    break;
             }
         }
     }

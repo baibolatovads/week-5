@@ -10,15 +10,11 @@ namespace MySnake
     {
         static void Main(string[] args)
         {
+
+            
             
             Menu menu = new Menu();
-            Game game = new Game();
-            
-            while (true)
-            {
-                //game.Status();
-                menu.Process();
-            }
+            menu.Process();
             /*
             Game game = new Game();
             game.SetUpBoard();

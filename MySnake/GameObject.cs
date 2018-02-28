@@ -10,9 +10,9 @@ namespace MySnake
 {
     public abstract class GameObject
     {
-        public List<Point> body { get; }
-        public char sign { get; }
-        public ConsoleColor color { get; }
+        public List<Point> body { get; set; }
+        public char sign { get; set; }
+        public ConsoleColor color { get; set; }
 
         public GameObject() { }
 
@@ -40,7 +40,7 @@ namespace MySnake
             Type t = this.GetType();
             string fname = t.Name + ".xml";
 
-            using (FileStream fs = new FileStream(fname, FileMode.OpenOrCreate, FileAccess.ReadWrite))
+            using (FileStream fs = new FileStream(fname, FileMode.Create, FileAccess.ReadWrite))
             {
                 XmlSerializer xs = new XmlSerializer(t);
                 xs.Serialize(fs, this);

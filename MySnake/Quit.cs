@@ -43,10 +43,13 @@ namespace MySnake
                             Console.Clear();
                             if (index == 0)
                             {
+                                //Environment.Exit(0);
+                                
                                 return false;
                             }
                             if (index == 1)
                             {
+                                Environment.Exit(0);
                                 return true;
                             }
                             break;

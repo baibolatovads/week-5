@@ -21,15 +21,17 @@ namespace MySnake
             
             Game game = new Game();
             game.Start();
-            game.Status();
+            game.SetUpBoard();
+
             //game.Status();
             while (game.isAlive)
             {
-                
+
                 ConsoleKeyInfo pressedButton = Console.ReadKey();
                 game.Process(pressedButton);
 
             }
+            DrawTitle();
             
         }
 
@@ -100,45 +102,48 @@ namespace MySnake
                     Console.Write(">");
                     Console.ForegroundColor = unselectedColor;
                 }
+                
             }
         }
 
         public void Process()
         {
-
             DrawTitle();
-            Draw();
-            ConsoleKeyInfo pressedButton = Console.ReadKey(true);
-            switch (pressedButton.Key)
+            while (true)
             {
-                case ConsoleKey.UpArrow:
-                    selectedItemIndex--;
-                    if (selectedItemIndex < 0)
-                    {
-                        selectedItemIndex = items.Length - 1;
-                    }
-                    break;
-                case ConsoleKey.DownArrow:
-                    selectedItemIndex++;
-                    if (selectedItemIndex >= items.Length)
-                    {
-                        selectedItemIndex = 0;
-                    }
-                    break;
-                case ConsoleKey.Enter:
+                Draw();
+                ConsoleKeyInfo pressedButton = Console.ReadKey(true);
+                switch (pressedButton.Key)
+                {
+                    case ConsoleKey.UpArrow:
+                        selectedItemIndex--;
+                        if (selectedItemIndex < 0)
+                        {
+                            selectedItemIndex = items.Length - 1;
+                        }
+                        break;
+                    case ConsoleKey.DownArrow:
+                        selectedItemIndex++;
+                        if (selectedItemIndex >= items.Length)
+                        {
+                            selectedItemIndex = 0;
+                        }
+                        break;
+                    case ConsoleKey.Enter:
 
-                    switch (selectedItemIndex)
-                    {
-                        case 0:
-                            NewGame();
-                            break;
-                        case 1:
-                            Exit();
-                            
-                            break;
-                    }
+                        switch (selectedItemIndex)
+                        {
+                            case 0:
+                                NewGame();
+                                break;
+                            case 1:
+                                Exit();
 
-                    break;
+                                break;
+                        }
+
+                        break;
+                }
             }
         }
         void DrawTitle()
